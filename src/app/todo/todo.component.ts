@@ -20,11 +20,10 @@ export class TodoComponent implements OnInit {
   ngOnInit() {
 
     this.id = this.route.snapshot.params['id'];
-    //this.todo = new Todo(1,'',false,new Date());
     this.todoService.retrieveTodo('in28minutes', this.id)
       .subscribe(
         Response => {
-          this.todo = Response;
+          return this.todo = Response;
         }
       )
   }
