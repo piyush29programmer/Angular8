@@ -1,9 +1,6 @@
 <div class="container" *ngIf="todo">
     <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Enter valid value</div>
     <div class="alert alert-warning" *ngIf="targetDate.dirty && targetDate.invalid">Enter valid Target Date</div>
-    <!-- <div class="alert alert-warning" *ngIf="targetDescription.dirty && targetDescription.invalid">Enter atleast 5 char
-        in description
-    </div> -->
 
     <!-- #todoForm - Have entire form in #todoForm variable and aad validation-->
     <form (ngSubmit)=" !todoForm.invalid && saveTodo()" #todoForm="ngForm">
