@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http'
 
 export class HelloWorldBean {
   constructor(public message: string) {
@@ -16,11 +16,15 @@ export class WelcomeDataService {
     private http: HttpClient
   ) { }
 
-  executeHelloWorldBeanService() {
-    return this.http.get<HelloWorldBean>('http://localhost:8080/hello-world-bean');
-  }
-
   executeHelloWorlServiceWithPathVariable(name) {
     return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world/path-variable/${name}`);
   }
+
+  // admin:1 Access to XMLHttpRequest at 'http://localhost:8080/hello-world/path-variable/admin' 
+  // from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' 
+  // header is present on the requested resource.
+
+  /*  Access to XMLHttpRequest at 'http://localhost:8080/hello-world/path-variable/admin' from 
+   origin 'http://localhost:4200' has been blocked by CORS policy: Response to preflight request 
+   doesn't pass access control check: It does not have HTTP ok status. */
 }

@@ -1,25 +1,25 @@
 <div class="container" *ngIf="todo">
     <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Enter valid value</div>
-    <div class="alert alert-warning" *ngIf="todoForm.dirty && targetDate.invalid">Enter valid Target Date</div>
-    <!-- <div class="alert alert-warning" *ngIf="targetDescription.dirty && targetDescription.invalid">Enter atleast 5 char -->
-    in description
-</div>
+    <div class="alert alert-warning" *ngIf="targetDate.dirty && targetDate.invalid">Enter valid Target Date</div>
+    <!-- <div class="alert alert-warning" *ngIf="targetDescription.dirty && targetDescription.invalid">Enter atleast 5 char
+        in description
+    </div> -->
 
-<!-- #todoForm - Have entire form in #todoForm variable and aad validation-->
-<form (ngSubmit)=" !todoForm.invalid && saveTodo()" #todoForm="ngForm">
-    <fieldset class="form-group">
-        <label>Description</label>
-        <input type="text" #targetDescription="ngModel" [(ngModel)]="todo.description" class="form-control"
-            name="description" required="required">
-    </fieldset>
+    <!-- #todoForm - Have entire form in #todoForm variable and aad validation-->
+    <form (ngSubmit)=" !todoForm.invalid && saveTodo()" #todoForm="ngForm">
+        <fieldset class="form-group">
+            <label>Description</label>
+            <input type="text" #targetDescription="ngModel" [(ngModel)]="todo.description" class="form-control"
+                name="description" required="required">
+        </fieldset>
 
-    <fieldset class="form-group">
-        <label>TargetDate</label>
-        <input type="date" #targetDate="ngModel" [ngModel]="todo.targetDate | date:'yyyy-MM-dd'"
-            (ngModelChange)="todo.targetDate = $event" class="form-control" name="targetDate" required="required">
-    </fieldset>
+        <fieldset class="form-group">
+            <label>TargetDate</label>
+            <input type="date" #targetDate="ngModel" [ngModel]="todo.targetDate | date:'yyyy-MM-dd'"
+                (ngModelChange)="todo.targetDate = $event" class="form-control" name="targetDate" required="required">
+        </fieldset>
 
-    <button type="submit" class="btn btn-success">Save</button>
-</form>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
 
 </div>
