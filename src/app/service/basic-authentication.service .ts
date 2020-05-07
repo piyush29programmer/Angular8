@@ -2,12 +2,34 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators'
 import { API_URL } from '../app.constants';
+
+export const TOKEN = 'token'
+export const AUTHENTICATED_USER = 'authenticaterUser'
+
 @Injectable({
   providedIn: 'root'
 })
 export class BasicAuthenticationService {
 
   constructor(private http: HttpClient) { }
+
+  executeJWTAuthenticationService(username, password) {
+
+
+    return this.http.post<any>(
+      `${API_URL}/authenticate`, {
+      username,
+      password
+    }).pipe(
+      map(
+        data => {
+          sessionStorage.setItem(AUTHENTICATED_USER, username);
+          sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
+          return data;
+        }
+      )
+    );
+  }
 
   executeAuthenticationService(username, password) {
 
@@ -21,8 +43,8 @@ export class BasicAuthenticationService {
       , { headers }).pipe(
         map(
           data => {
-            sessionStorage.setItem('authenticaterUser', username);
-            sessionStorage.setItem('token', basicAuthHeaderString);
+            sessionStorage.setItem(AUTHENTICATED_USER, username);
+            sessionStorage.setItem(TOKEN, basicAuthHeaderString);
             return data;
           }
         )
@@ -30,23 +52,23 @@ export class BasicAuthenticationService {
   }
 
   getAuthenticatedUser() {
-    return sessionStorage.getItem('authenticaterUser');
+    return sessionStorage.getItem(AUTHENTICATED_USER);
   }
 
   getAuthenticatedToken() {
     if (this.getAuthenticatedUser()) {
-      return sessionStorage.getItem('token');
+      return sessionStorage.getItem(TOKEN);
     }
 
   }
 
   logout() {
-    sessionStorage.removeItem('authenticaterUser')
-    sessionStorage.removeItem('token')
+    sessionStorage.removeItem(AUTHENTICATED_USER)
+    sessionStorage.removeItem(TOKEN)
   }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('authenticaterUser');
+    let user = sessionStorage.getItem(AUTHENTICATED_USER);
     return !(user === null)
   }
 
