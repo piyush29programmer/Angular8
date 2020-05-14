@@ -1,17 +1,25 @@
-<h1>Welcome</h1>
-<div class="container">
-    Welcome {{name}}. You can manage your todos <a routerLink="/todos">here</a>
+<!-- <h1>Welcome</h1> -->
+<div class="main">
+    <div class="container login-main-text">
+        <h2>
+            Welcome {{name}}. You can manage your todos <a routerLink="/todos">here</a>
+        </h2>
 
-</div>
+    </div>
 
-<div class="container">
-    Click here to get a customized welcome message
-    <button (click)="GetWelcomeMessageWithParameter()" class="btn btn-success">Get Welcome Message</button>
-</div>
+    <div class="container login-main-text">
+        <h2>
+            Click here to get a customized welcome message
+        </h2>
+        <br>
 
-<div class="container" *ngIf="welcomeMessageFromService">
-    <h2>
-        Your Customized Welcome Message
-        {{welcomeMessageFromService}}
-    </h2>
+        <button (click)="GetWelcomeMessageWithParameter()" class="btn btn-success"> Get Welcome Message</button>
+    </div>
+    <br>
+    <div class="container login-return-text" *ngIf="welcomeMessageFromService">
+        <h2>
+            Your Customized Welcome Message <br>
+            <div style="color: chocolate;">{{welcomeMessageFromService}}</div>
+        </h2>
+    </div>
 </div>
